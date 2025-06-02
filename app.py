@@ -4,6 +4,8 @@ import torchvision.transforms as transforms
 from PIL import Image
 from torchvision import models
 import os
+import torch.nn.functional as F 
+
 
 # Class map
 class_map = {0: "Salmon", 1: "Trout"}
@@ -38,7 +40,11 @@ if uploaded_file is not None:
 
     with torch.no_grad():
         outputs = model(img_tensor)
-        predicted_class = torch.argmax(outputs, dim=1).item()
+        probabilities = F.softmax(outputs, dim=1)
+        confidence, predicted_class = torch.max(probabilities, dim=1)
+        predicted_class = predicted_class.item()
+        confidence = confidence.item()
         result = class_map[predicted_class]
 
     st.markdown(f"### Prediction: **{result}** ({predicted_class})")
+    st.markdown(f"Confidence: **{confidence * 100:.2f}%**")
