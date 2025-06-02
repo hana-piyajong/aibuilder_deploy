@@ -1,2 +1,2 @@
-# aibuilder salmon trout prototype deploy
-streamlit app
+# aibuilder deploy
+aibuilders salmon trout classification prototype deploy
