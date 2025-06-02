@@ -24,7 +24,7 @@ model = load_model()
 # Transform image
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
-    transforms.ToTensor(),
+    transforms.ToTensor()
 ])
 # Streamlit UI
 st.title("Fish Classifier: Salmon or Trout?")
